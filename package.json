@@ -1,0 +1,45 @@
+{
+  "name": "slopper",
+  "version": "1.0.0",
+  "description": "AI-powered PR trust analysis GitHub Action",
+  "main": "lib/main.js",
+  "scripts": {
+    "build": "tsc",
+    "package": "ncc build lib/main.js -o dist --source-map --license licenses.txt",
+    "test": "jest",
+    "all": "npm run build && npm run test && npm run package"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malvads/slopper.git"
+  },
+  "keywords": [
+    "github-action",
+    "security",
+    "pr-analysis",
+    "trust",
+    "supply-chain"
+  ],
+  "author": "malvads",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.0",
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@anthropic-ai/vertex-sdk": "^0.6.0",
+    "@google/genai": "^2.8.0",
+    "groq-sdk": "^1.2.1",
+    "minimatch": "^10.2.5",
+    "openai": "^4.77.0",
+    "yaml": "^2.9.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/minimatch": "^5.1.2",
+    "@types/node": "^22.10.0",
+    "@vercel/ncc": "^0.38.3",
+    "jest": "^30.4.2",
+    "ts-jest": "^29.4.11",
+    "typescript": "^5.7.0"
+  }
+}

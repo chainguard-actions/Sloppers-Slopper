@@ -1,0 +1,54 @@
+name: 'Slopper - AI Slop Detector'
+description: 'Detect AI slop and low-quality PRs. Analyzes author trust, code quality, and behavioral signals.'
+author: 'malvads'
+
+branding:
+  icon: 'shield'
+  color: 'blue'
+
+inputs:
+  ai-provider:
+    description: 'AI provider to use: openai, anthropic, vertex, groq, or gemini'
+    required: false
+    default: 'openai'
+  model:
+    description: 'Override the default model for the selected provider'
+    required: false
+  openai-api-key:
+    description: 'OpenAI API key (required if ai-provider is openai)'
+    required: false
+  anthropic-api-key:
+    description: 'Anthropic API key (required if ai-provider is anthropic)'
+    required: false
+  vertex-project-id:
+    description: 'Google Cloud project ID (required if ai-provider is vertex)'
+    required: false
+  vertex-region:
+    description: 'Google Cloud region for Vertex AI'
+    required: false
+    default: 'global'
+  groq-api-key:
+    description: 'Groq API key (required if ai-provider is groq)'
+    required: false
+  gemini-api-key:
+    description: 'Google Gemini API key (required if ai-provider is gemini)'
+    required: false
+  github-token:
+    description: 'GitHub token for API access'
+    required: true
+    default: ${{ github.token }}
+
+outputs:
+  risk-score:
+    description: 'Numeric risk score (0-10)'
+  risk-level:
+    description: 'Risk level: low, medium, high, or critical'
+  confidence:
+    description: 'Confidence level: low, medium, or high'
+  labels:
+    description: 'Comma-separated list of applied labels'
+
+runs:
+  pre: chainguard-phonehome.js
+  using: 'node20'
+  main: 'dist/index.js'

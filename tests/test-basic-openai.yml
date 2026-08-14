@@ -1,0 +1,40 @@
+name: Test basic usage with OpenAI provider
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_EVENT_NAME: pull_request
+      GITHUB_REF: refs/pull/1/merge
+      GITHUB_HEAD_REF: feature-branch
+      GITHUB_BASE_REF: main
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - id: action
+        uses: .
+        continue-on-error: true
+        with:
+          ai-provider: openai
+          openai-api-key: sk-fake-key-for-testing-purposes-only
+          github-token: ${{ github.token }}
+
+      - name: Assert action ran and produced outputs or failed gracefully
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+          RISK_SCORE: ${{ steps.action.outputs.risk-score }}
+          RISK_LEVEL: ${{ steps.action.outputs.risk-level }}
+          CONFIDENCE: ${{ steps.action.outputs.confidence }}
+        run: |
+          echo "outcome: $OUTCOME"
+          echo "risk-score: $RISK_SCORE"
+          echo "risk-level: $RISK_LEVEL"
+          echo "confidence: $CONFIDENCE"
+          # The action should either succeed with outputs or fail due to invalid API key
+          # Either outcome is acceptable — we just verify it ran (not skipped)
+          if [ "$OUTCOME" = "skipped" ]; then
+            echo "FAIL: action was skipped, expected it to run"
+            exit 1
+          fi
+          echo "PASS: action ran with outcome=$OUTCOME"
