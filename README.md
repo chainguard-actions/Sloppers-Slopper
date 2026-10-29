@@ -6,9 +6,9 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 
 ## Versions
 
-| Version | Tag | Upstream commit |
-|---------|-----|-----------------|
-| v0.0.1 | [`v0.0.1`](https://github.com/chainguard-actions/Sloppers-Slopper/tree/v0.0.1) | [`01c438b`](https://github.com/Sloppers/Slopper/commit/01c438b4f6a2636cdc801f14b896ea9497781eb9) |
+| Version | Tag | Upstream commit | Hardening report |
+|---------|-----|-----------------|------------------|
+| v0.0.1 | [`v0.0.1`](https://github.com/chainguard-actions/Sloppers-Slopper/tree/v0.0.1) | [`01c438b`](https://github.com/Sloppers/Slopper/commit/01c438b4f6a2636cdc801f14b896ea9497781eb9) | [`HARDENING.md`](https://github.com/chainguard-actions/Sloppers-Slopper/blob/v0.0.1/HARDENING.md) |
 
 ## Privacy
 
